@@ -5,17 +5,30 @@ export const HeaderArea = styled.div`
     align-items: center;
     width: 100%;
     height: 5rem;
-    background-color: blue;
+    background-color: antiquewhite;
 
-    .test {
-        margin: "0px auto";
-        display: "flex";
-        align-items: "center";
+    & .container {
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+        margin: 0 auto;
     }
-`;
 
-export const Logo = styled.div`
-    padding: 0 30rem;
-    width: 50px;
-    height: 50px;
+    & .container-img {
+        display: flex;
+        font-weight: bold;
+        align-items: center;
+        font-size: 1rem;
+    }
+
+    & .container-img > img {
+        width: 50px;
+        height: 50px;
+        margin-right: 1rem;
+    }
+
+    & .buttons {
+        display: flex;
+        align-items: center;
+    }
 `;
