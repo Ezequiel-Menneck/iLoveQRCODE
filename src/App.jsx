@@ -1,45 +1,79 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import "./App.css";
+import React, { useEffect, useRef, useState } from "react";
+import QRCodeStyling from "qr-code-styling";
+import Header from './components/Header'
 
-function App() {
-  const [count, setCount] = useState(0)
+const qrCode = new QRCodeStyling({
+  width: 200,
+  height: 200,
+  image:
+    "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+  dotsOptions: {
+    color: "#4267b2",
+    type: "rounded"
+  },
+  imageOptions: {
+    crossOrigin: "anonymous",
+    margin: 10
+  }
+});
+
+export default function App() {
+  const [url, setUrl] = useState("https://qr-code-styling.com");
+  const [fileExt, setFileExt] = useState("png");
+  const ref = useRef(null);
+
+  useEffect(() => {
+    qrCode.append(ref.current);
+  }, []);
+
+  useEffect(() => {
+    qrCode.update({
+      data: url
+    });
+  }, [url]);
+
+  const onUrlChange = (event) => {
+    event.preventDefault();
+    setUrl(event.target.value);
+  };
+
+  const onExtensionChange = (event) => {
+    setFileExt(event.target.value);
+  };
+
+  const onDownloadClick = () => {
+    qrCode.download({
+      extension: fileExt
+    });
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <Header />
+      <div style={styles.inputWrapper}>
+        <input value={url} onChange={onUrlChange} style={styles.inputBox} />
+        <select onChange={onExtensionChange} value={fileExt}>
+          <option value="png">PNG</option>
+          <option value="jpeg">JPEG</option>
+          <option value="webp">WEBP</option>
+        </select>
+        <button onClick={onDownloadClick}>Download</button>
+      </div>
+      <div ref={ref} />
     </div>
-  )
+  );
 }
 
-export default App
+const styles = {
+  inputWrapper: {
+    margin: "20px 0",
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%"
+  },
+  inputBox: {
+    flexGrow: 1,
+    marginRight: 20
+  }
+};
