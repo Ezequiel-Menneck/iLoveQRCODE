@@ -1,79 +1,89 @@
 import "./App.css";
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
-import Header from './components/Header'
+import Header from "./components/Header";
+import { Wrapper } from "./styled";
 
 const qrCode = new QRCodeStyling({
-  width: 200,
-  height: 200,
-  image:
-    "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
-  dotsOptions: {
-    color: "#4267b2",
-    type: "rounded"
-  },
-  imageOptions: {
-    crossOrigin: "anonymous",
-    margin: 10
-  }
+    width: 200,
+    height: 200,
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+    dotsOptions: {
+        color: "#4267b2",
+        type: "rounded",
+    },
+    imageOptions: {
+        crossOrigin: "anonymous",
+        margin: 10,
+    },
 });
 
 export default function App() {
-  const [url, setUrl] = useState("https://qr-code-styling.com");
-  const [fileExt, setFileExt] = useState("png");
-  const ref = useRef(null);
+    const [url, setUrl] = useState("https://qr-code-styling.com");
+    const [width, setWidth] = useState(200);
+    const [height, setHeight] = useState(200);
+    const [fileExt, setFileExt] = useState("png");
+    const ref = useRef(null);
 
-  useEffect(() => {
-    qrCode.append(ref.current);
-  }, []);
+    useEffect(() => {
+        qrCode.append(ref.current);
+    }, []);
 
-  useEffect(() => {
-    qrCode.update({
-      data: url
-    });
-  }, [url]);
+    useEffect(() => {
+        qrCode.update({
+            data: url,
+        });
+    }, [url]);
 
-  const onUrlChange = (event) => {
-    event.preventDefault();
-    setUrl(event.target.value);
-  };
+    const onUrlChange = (event) => {
+        event.preventDefault();
+        setUrl(event.target.value);
+    };
 
-  const onExtensionChange = (event) => {
-    setFileExt(event.target.value);
-  };
+    const onExtensionChange = (event) => {
+        setFileExt(event.target.value);
+    };
 
-  const onDownloadClick = () => {
-    qrCode.download({
-      extension: fileExt
-    });
-  };
+    const onDownloadClick = () => {
+        qrCode.download({
+            extension: fileExt,
+        });
+    };
 
-  return (
-    <div className="App">
-      <Header />
-      <div style={styles.inputWrapper}>
-        <input value={url} onChange={onUrlChange} style={styles.inputBox} />
-        <select onChange={onExtensionChange} value={fileExt}>
-          <option value="png">PNG</option>
-          <option value="jpeg">JPEG</option>
-          <option value="webp">WEBP</option>
-        </select>
-        <button onClick={onDownloadClick}>Download</button>
-      </div>
-      <div ref={ref} />
-    </div>
-  );
+    return (
+        <>
+            <Header />
+            <Wrapper>
+                <div className="App">
+                    <div style={styles.inputWrapper}>
+                        <input
+                            value={url}
+                            onChange={onUrlChange}
+                            style={styles.inputBox}
+                        />
+                        <select onChange={onExtensionChange} value={fileExt}>
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WEBP</option>
+                        </select>
+                        <button onClick={onDownloadClick}>Download</button>
+                    </div>
+                    <div ref={ref} />
+                </div>
+            </Wrapper>
+        </>
+    );
 }
 
 const styles = {
-  inputWrapper: {
-    margin: "20px 0",
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%"
-  },
-  inputBox: {
-    flexGrow: 1,
-    marginRight: 20
-  }
+    inputWrapper: {
+        margin: "20px 0",
+        display: "flex",
+        justifyContent: "space-between",
+        width: "100%",
+    },
+    inputBox: {
+        flexGrow: 1,
+        marginRight: 20,
+    },
 };
