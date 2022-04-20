@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
 import Header from "./components/Header";
-import { Wrapper, Table } from "./styled";
+import { Wrapper, D } from "./styled";
 import { Button } from "./components/Button/styled";
 
 const qrCode = new QRCodeStyling({
@@ -69,69 +69,8 @@ const App = () => {
             <Wrapper>
                 <div className="qr-main">
                     <div className="qr-form">
-                        <Table>
-                            <tr>
-                                <th className="bbb" >Data</th>
-                                <th>
-                                    <input value={url} onChange={onUrlChange} />
-                                </th>
-                            </tr>
-                            <tr>
-                                <th className="bbb">Image</th>
-                                <th>
-                                    <input
-                                        type="file"
-                                        name="arquivos"
-                                        accept="image/png, image/jpeg"
-                                        multiple
-                                        className="input-img"
-                                    />
-                                </th>
-                            </tr>
-                            <tr>
-                                <th className="bbb">Width</th>
-                                <th>
-                                    <input
-                                        type="number"
-                                        value={width}
-                                        min="100"
-                                        max="350"
-                                        onChange={onWidthChange}
-                                    />
-                                </th>
-                            </tr>
-                            <tr>
-                                <th className="bbb">Height</th>
-                                <th>
-                                    <input
-                                        type="number"
-                                        value={height}
-                                        min="100"
-                                        max="350"
-                                        onChange={onHeightChange}
-                                    />
-                                </th>
-                            </tr>
-                        </Table>
-                    </div>
-                    <div className="qr-display">
-                        <div ref={ref} className="qrcode" />
-                        <select onChange={onExtensionChange} value={fileExt}>
-                            <option value="png">PNG</option>
-                            <option value="jpeg">JPEG</option>
-                            <option value="webp">WEBP</option>
-                        </select>
-                        <Button onClick={onDownloadClick}>Download</Button>
-                    </div>
-                </div>
-            </Wrapper>
-        </>
-    );
-};
-
-export default App;
-
-                        {/* <D>
+                        <label className="mainOption">Main Options</label>
+                        <D>
                             <label>Data</label>
                             <input value={url} onChange={onUrlChange} />
                         </D>
@@ -142,6 +81,7 @@ export default App;
                                 name="arquivos"
                                 accept="image/png, image/jpeg"
                                 multiple
+                                className="input-img"
                             />
                         </D>
                         <D>
@@ -163,4 +103,23 @@ export default App;
                                 max="350"
                                 onChange={onHeightChange}
                             />
-                        </D> */}
+                        </D>
+                    </div>
+                    <div className="qr-display">
+                        <div ref={ref} className="qrcode" />
+                        <button className="download-button" onClick={onDownloadClick}>Download</button>
+                        <select className="format-img" onChange={onExtensionChange} value={fileExt}>
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WEBP</option>
+                        </select>
+                    </div>
+                </div>
+            </Wrapper>
+        </>
+    );
+};
+
+export default App;
+
+                       
