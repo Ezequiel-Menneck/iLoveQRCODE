@@ -5,7 +5,7 @@ export const HeaderArea = styled.div`
     align-items: center;
     width: 100%;
     height: 5rem;
-    background-color: antiquewhite;
+    background-color: #0f304b;
 
     & .container {
         display: flex;
@@ -19,6 +19,7 @@ export const HeaderArea = styled.div`
         font-weight: bold;
         align-items: center;
         font-size: 1rem;
+        color: #f3f3f3;
     }
 
     & .container-img > img {
