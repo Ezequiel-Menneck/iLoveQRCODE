@@ -3,19 +3,7 @@ import QRCodeStyling from "qr-code-styling";
 import Header from "./components/Header";
 import { Wrapper, OptionWrapper, QrWrapper } from "./styled";
 
-const qrCode = new QRCodeStyling({
-    width: 200,
-    height: 200,
-    image: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
-    dotsOptions: {
-        color: "#22b622",
-        type: "rounded",
-    },
-    imageOptions: {
-        crossOrigin: "anonymous",
-        margin: 2,
-    },
-});
+const qrCode = new QRCodeStyling();
 
 const App = () => {
     const [url, setUrl] = useState("https://twitter.com/_menneck");
