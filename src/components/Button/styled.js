@@ -9,6 +9,6 @@ export const Button = styled.button`
     height: 2.5rem;
     border: none;
     cursor: pointer;
-    background-color: burlywood;
+    background-color: #f3f3f3;
     border-radius: 10px;
 `;
